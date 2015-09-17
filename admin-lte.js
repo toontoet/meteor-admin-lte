@@ -74,6 +74,17 @@ Template.AdminLTE.events({
     }
   },
 
+  'click [data-toggle=control-sidebar]': function (e, t) {
+    e.preventDefault();
+    var sidebar = $('.control-sidebar');
+
+    if (!sidebar.hasClass('control-sidebar-open')) {
+      sidebar.addClass('control-sidebar-open');
+    } else {
+      sidebar.removeClass('control-sidebar-open');
+    }
+  },
+
   'click .content-wrapper': function (e, t) {
     //Enable hide menu when clicking on the content-wrapper on small screens
     if ($(window).width() <= (screenSizes.sm - 1) && $("body").hasClass("sidebar-open")) {
