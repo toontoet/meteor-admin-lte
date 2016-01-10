@@ -79,8 +79,10 @@ Template.AdminLTE.events({
     var sidebar = $('.control-sidebar');
 
     if (!sidebar.hasClass('control-sidebar-open')) {
+      $("body").addClass('control-sidebar-open'); // slide
       sidebar.addClass('control-sidebar-open');
     } else {
+      $("body").removeClass('control-sidebar-open'); // slide
       sidebar.removeClass('control-sidebar-open');
     }
   },
