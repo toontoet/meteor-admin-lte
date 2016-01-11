@@ -87,6 +87,32 @@ Template.AdminLTE.events({
     }
   },
 
+  // box collapse
+  'click [data-widget=collapse]': function(e, t) {
+    e.preventDefault();
+    var $this = $(e.currentTarget);
+    //Find the box parent
+    var box = $this.parents(".box").first();
+    //Find the body and the footer
+    var box_content = box.find("> .box-body, > .box-footer, > form  >.box-body, > form > .box-footer");
+
+    if (!box.hasClass("collapsed-box")) {
+      //Convert minus into plus
+      $this.children(":first").removeClass("fa-minus").addClass("fa-plus");
+      //Hide the content
+      box_content.slideUp(500, function () {
+        box.addClass("collapsed-box");
+      });
+    } else {
+      //Convert plus into minus
+      $this.children(":first").removeClass("fa-plus").addClass("fa-minus");
+      //Show the content
+      box_content.slideDown(500, function () {
+        box.removeClass("collapsed-box");
+      });
+    }
+  },
+
   'click .content-wrapper': function (e, t) {
     //Enable hide menu when clicking on the content-wrapper on small screens
     if ($(window).width() <= (screenSizes.sm - 1) && $("body").hasClass("sidebar-open")) {
