@@ -23,9 +23,21 @@ Template.AdminLTE.onCreated(function () {
 
   fixed && $('body').addClass('fixed');
   sidebarMini && $('body').addClass('sidebar-mini');
+  $('body').addClass('skin-' + skin);
+
   self.removeClasses = function () {
     fixed && $('body').removeClass('fixed');
     sidebarMini && $('body').removeClass('sidebar-mini');
+    $('body').removeClass('skin-' + skin);
+  }
+
+  if ($("body").hasClass('fixed')) {
+    $(".control-sidebar").css({
+      'position': 'fixed',
+      'max-height': '100%',
+      'overflow': 'auto',
+      'padding-bottom': '50px'
+    });
   }
 
   this.autorun(function () {
@@ -78,12 +90,12 @@ Template.AdminLTE.events({
     e.preventDefault();
     var sidebar = $('.control-sidebar');
 
-    if (!sidebar.hasClass('control-sidebar-open')) {
-      $("body").addClass('control-sidebar-open'); // slide
-      sidebar.addClass('control-sidebar-open');
-    } else {
+    if (sidebar.hasClass('control-sidebar-open')) {
       $("body").removeClass('control-sidebar-open'); // slide
       sidebar.removeClass('control-sidebar-open');
+    } else {
+      $("body").addClass('control-sidebar-open'); // slide
+      sidebar.addClass('control-sidebar-open');
     }
   },
 
