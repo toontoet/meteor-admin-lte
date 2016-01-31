@@ -10,15 +10,28 @@ Template.AdminLTE.onCreated(function () {
   var skin = 'blue';
   var fixed = false;
   var sidebarMini = false;
+  var page = null;
 
   if (this.data) {
     skin = this.data.skin || skin;
     fixed = this.data.fixed || fixed;
     sidebarMini = this.data.sidebarMini || sidebarMini;
+    page = this.data.page || page;
   }
 
   self.isReady = new ReactiveVar(false);
   self.style = waitOnCSS(cssUrl());
+
+  if (page == 'login') {
+    $('body').addClass('login-page');
+    this.autorun(function () {
+      if (self.style.ready()) {
+        self.isReady.set(true);
+      }
+    });
+    return;
+  }
+
   self.skin = waitOnCSS(skinUrl(skin));
 
   fixed && $('body').addClass('fixed');
