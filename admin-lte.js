@@ -24,6 +24,9 @@ Template.AdminLTE.onCreated(function () {
 
   if (page == 'login') {
     $('body').addClass('login-page');
+    self.removeClasses = function () {
+      $('body').removeClass('login-page');
+    }
     this.autorun(function () {
       if (self.style.ready()) {
         self.isReady.set(true);
@@ -63,7 +66,7 @@ Template.AdminLTE.onCreated(function () {
 Template.AdminLTE.onDestroyed(function () {
   this.removeClasses();
   this.style.remove();
-  this.skin.remove();
+  if (this.skin) this.skin.remove();
 });
 
 Template.AdminLTE.helpers({
